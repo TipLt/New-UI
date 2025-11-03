@@ -1,0 +1,176 @@
+/* ==========================================================
+   Modern Payment Management UI - Dark Gradient Theme
+   Author: Đỗ Duy Anh
+   ========================================================== */
+
+/* ===== Base ===== */
+body {
+  background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+  color: #f8f9fa;
+  font-family: "Inter", "Poppins", sans-serif;
+  animation: fadeIn 0.6s ease;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Back */
+.btn-secondary {
+  background: linear-gradient(90deg, #343a40, #212529);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: linear-gradient(90deg, #495057, #2b3035);
+  color: #f8f9fa;
+  border: 1px solid #00b4d8;
+  box-shadow: 0 0 12px rgba(0, 180, 216, 0.3);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(0, 180, 216, 0.6);
+  transform: translateY(-3px);
+}
+
+/* Paid */
+.btn-success {
+  background: linear-gradient(90deg, #198754, #20c997);
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: linear-gradient(90deg, #20c997, #198754);
+}
+
+/* Unpaid */
+.btn-warning {
+  background: linear-gradient(90deg, #ffc107, #ffb703);
+  color: #222;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(90deg, #ffb703, #ffc107);
+  color: #111;
+}
+
+/* Disabled buttons */
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ===== Table ===== */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: linear-gradient(180deg, #2a2a2a, #1f1f1f);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+.table thead {
+  background: linear-gradient(90deg, #343a40, #1f1f1f);
+  color: #f1f3f5;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.table th, .table td {
+  padding: 14px 16px;
+  text-align: center;
+  border: none;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: all 0.25s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.002);
+}
+
+/* ===== Payment Status Badge ===== */
+.payment-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+
+.payment-badge.paid {
+  background: rgba(25, 135, 84, 0.2);
+  color: #20c997;
+  border: 1px solid rgba(25, 135, 84, 0.4);
+}
+
+.payment-badge.unpaid {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffb703;
+  border: 1px solid rgba(255, 193, 7, 0.35);
+}
+
+/* ===== Empty state ===== */
+.text-muted {
+  color: #999 !important;
+  font-style: italic;
+  animation: fadePulse 1.8s infinite;
+}
+
+@keyframes fadePulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ===== Table container animation ===== */
+.table {
+  animation: floatIn 0.6s ease;
+}
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  body { font-size: 0.9rem; padding: 20px; }
+  .table th, .table td { font-size: 0.85rem; }
+  h2 { font-size: 1.4rem; }
+}
+
