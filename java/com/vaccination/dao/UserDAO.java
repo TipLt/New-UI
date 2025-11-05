@@ -266,7 +266,8 @@ public class UserDAO {
         User user = new User();
         user.setUserId(rs.getInt("UserID"));
         user.setEmail(rs.getString("Email"));
-        user.setPassword(rs.getString("Password")); // Lấy cả password? Cân nhắc bảo mật
+        String dbPassword = rs.getString("Password");
+        user.setPassword(dbPassword != null ? dbPassword.trim() : null); // Trim password to handle NVARCHAR padding
         user.setFullName(rs.getString("FullName"));
         user.setPhoneNumber(rs.getString("PhoneNumber"));
         user.setRole(rs.getString("Role"));

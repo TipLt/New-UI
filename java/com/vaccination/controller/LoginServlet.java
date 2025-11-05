@@ -35,6 +35,10 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+        // Trim inputs to avoid whitespace issues
+        email = email.trim();
+        password = password.trim();
+
         User user = userDAO.findByEmail(email);
 
         if (user != null && PasswordUtil.verifyPassword(password, user.getPassword()))  {
