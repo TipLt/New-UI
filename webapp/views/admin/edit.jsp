@@ -157,7 +157,7 @@
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                                     <i class="bi bi-telephone-fill text-gray-400"></i>
                                 </div>
-                                <input type="tel" id="phoneNumber" name="phone" Numberrequired value="${user.PhoneNumber}"
+                                <input type="tel" id="phoneNumber" name="phoneNumber" required value="${user.PhoneNumber}"
                                        class="w-full rounded-lg border border-gray-300 pl-11 pr-4 py-3 text-gray-900 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 transition"
                                        placeholder="0123456789">
                             </div>
