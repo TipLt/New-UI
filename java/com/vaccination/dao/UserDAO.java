@@ -265,7 +265,8 @@ public class UserDAO {
     private User extractUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setUserId(rs.getInt("UserID"));
-        user.setEmail(rs.getString("Email"));
+        String dbEmail = rs.getString("Email");
+        user.setEmail(dbEmail != null ? dbEmail.trim() : null); // Trim to handle NVARCHAR padding
         String dbPassword = rs.getString("Password");
         user.setPassword(dbPassword != null ? dbPassword.trim() : null); // Trim password to handle NVARCHAR padding
         user.setFullName(rs.getString("FullName"));
