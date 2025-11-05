@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import com.vaccination.model.User;
 
 @WebServlet("/admin/users/create")
 public class UserCreateServlet extends HttpServlet {
@@ -34,12 +35,25 @@ public class UserCreateServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String fullName = request.getParameter("fullName");
-        String phone = request.getParameter("phone");
+        String phoneNumber = request.getParameter("phoneNumber");
         String role = request.getParameter("role");
-
+        
+    if (fullName == null || fullName.trim().isEmpty()) {
+        request.setAttribute("error", "Full Name is required");
+        request.setAttribute("email", email);
+        request.setAttribute("phoneNumber",phoneNumber); // ✅ DÙNG: phoneNumber
+        request.setAttribute("role", role);
+        request.getRequestDispatcher("/views/admin/create.jsp").forward(request, response);
+        return;
+    }
         try {
-            if (userDAO.createUserWithRole(email, password, fullName, phone, role)) {
-                request.getSession().setAttribute("success", "User created successfully");
+        if (userDAO.createUserWithRole(
+                email.trim(), 
+                password.trim(), 
+                fullName.trim(),      
+                phoneNumber.trim(),   
+                role.trim())) {
+            request.getSession().setAttribute("success", "User created successfully");
             } else {
                 request.getSession().setAttribute("error", "Failed to create user");
             }
