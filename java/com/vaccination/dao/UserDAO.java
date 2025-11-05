@@ -289,11 +289,12 @@ public class UserDAO {
             user.setLastLogin(lastLogin.toLocalDateTime());
         }
 
-        // Try to get ImageUrl if column exists (optional column)
+        // Check if ImageUrl column exists before accessing it
         try {
+            rs.findColumn("ImageUrl");
             user.setImageUrl(rs.getString("ImageUrl"));
         } catch (SQLException e) {
-            // ImageUrl column doesn't exist, set to null
+            // ImageUrl column doesn't exist in this database schema
             user.setImageUrl(null);
         }
 
