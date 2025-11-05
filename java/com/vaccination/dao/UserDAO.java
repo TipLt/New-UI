@@ -289,7 +289,13 @@ public class UserDAO {
             user.setLastLogin(lastLogin.toLocalDateTime());
         }
 
-        user.setImageUrl(rs.getString("ImageUrl")); // <<<===== THÊM DÒNG NÀY
+        // Try to get ImageUrl if column exists (optional column)
+        try {
+            user.setImageUrl(rs.getString("ImageUrl"));
+        } catch (SQLException e) {
+            // ImageUrl column doesn't exist, set to null
+            user.setImageUrl(null);
+        }
 
         return user;
     }
