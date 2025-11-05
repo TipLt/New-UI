@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 
         User user = userDAO.findByEmail(email);
 
-        if (user != null && password.equals(user.getPassword()))  {
+        if (user != null && PasswordUtil.verifyPassword(password, user.getPassword()))  {
             if (!user.isActive()) {
                 request.setAttribute("error", "Your account has been deactivated");
                 request.getRequestDispatcher("/views/guest/login.jsp").forward(request, response);
