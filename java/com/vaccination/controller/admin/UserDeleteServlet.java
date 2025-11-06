@@ -21,7 +21,30 @@ public class UserDeleteServlet extends HttpServlet {
         
         if (!checkAdminAuth(request, response)) return;
         
-        int id = Integer.parseInt(request.getParameter("id"));
+        String idParam = request.getParameter("id");
+        if (idParam == null || idParam.trim().isEmpty()) {
+            request.getSession().setAttribute("error", "Invalid user ID");
+            response.sendRedirect(request.getContextPath() + "/admin/users");
+            return;
+        }
+        
+        int id;
+        try {
+            id = Integer.parseInt(idParam);
+        } catch (NumberFormatException e) {
+            request.getSession().setAttribute("error", "Invalid user ID format");
+            response.sendRedirect(request.getContextPath() + "/admin/users");
+            return;
+        }
+        
+        // Prevent deleting the current logged-in user
+        HttpSession session = request.getSession();
+        Integer currentUserId = (Integer) session.getAttribute("userId");
+        if (currentUserId != null && currentUserId == id) {
+            request.getSession().setAttribute("error", "Cannot delete your own account");
+            response.sendRedirect(request.getContextPath() + "/admin/users");
+            return;
+        }
 
         try {
             if (userDAO.deleteUser(id)) {
@@ -32,7 +55,8 @@ public class UserDeleteServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/admin/users");
             
         } catch (SQLException e) {
-            e.printStackTrace();
+            // Log the error appropriately in production
+            System.err.println("Error deleting user: " + e.getMessage());
             request.getSession().setAttribute("error", "Database error: " + e.getMessage());
             response.sendRedirect(request.getContextPath() + "/admin/users");
         }
