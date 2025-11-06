@@ -181,7 +181,7 @@
                                 <label class="mb-2 block text-sm font-medium text-gray-500">Password</label>
                                 <div class="flex items-center gap-2">
                                     <i class="bi bi-lock-fill text-gray-400"></i>
-                                    <p id="passwordText" class="text-base font-semibold text-gray-900 font-mono">••••••••</p>
+                                    <p id="passwordText" class="text-base font-semibold text-gray-900 font-mono">********</p>
                                     <button type="button" id="togglePassword" onclick="togglePasswordVisibility()" class="ml-2 text-primary hover:text-blue-700">
                                         <i id="toggleIcon" class="bi bi-eye-fill"></i>
                                     </button>
@@ -253,12 +253,12 @@
             const toggleIcon = document.getElementById('toggleIcon');
             const actualPassword = document.getElementById('actualPassword').value;
             
-            if (passwordText.textContent === '••••••••') {
+            if (passwordText.textContent === '********') {
                 passwordText.textContent = actualPassword;
                 toggleIcon.classList.remove('bi-eye-fill');
                 toggleIcon.classList.add('bi-eye-slash-fill');
             } else {
-                passwordText.textContent = '••••••••';
+                passwordText.textContent = '********';
                 toggleIcon.classList.remove('bi-eye-slash-fill');
                 toggleIcon.classList.add('bi-eye-fill');
             }
