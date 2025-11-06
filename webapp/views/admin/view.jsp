@@ -178,6 +178,18 @@
                             </div>
                             
                             <div>
+                                <label class="mb-2 block text-sm font-medium text-gray-500">Password</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="bi bi-lock-fill text-gray-400"></i>
+                                    <p id="passwordText" class="text-base font-semibold text-gray-900 font-mono">********</p>
+                                    <button type="button" id="togglePassword" onclick="togglePasswordVisibility()" class="ml-2 text-primary hover:text-blue-700">
+                                        <i id="toggleIcon" class="bi bi-eye-fill"></i>
+                                    </button>
+                                </div>
+                                <input type="hidden" id="actualPassword" value="${user.Password}">
+                            </div>
+                            
+                            <div>
                                 <label class="mb-2 block text-sm font-medium text-gray-500">Account Status</label>
                                 <p class="text-base font-semibold ${user.IsActive ? 'text-green-600' : 'text-red-600'}">
                                     ${user.IsActive ? 'Active' : 'Inactive'}
@@ -214,10 +226,13 @@
                                 </button>
                             </form>
                             
-                            <button onclick="if(confirm('Are you sure you want to delete this user?')) { /* Add delete logic */ }" class="inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2.5 text-white font-medium hover:bg-red-700 transition">
-                                <i class="bi bi-trash-fill"></i>
-                                <span>Delete User</span>
-                            </button>
+                            <form action="${pageContext.request.contextPath}/admin/users/delete" method="post" class="inline" onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone.');">
+                                <input type="hidden" name="id" value="${user.UserID}">
+                                <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2.5 text-white font-medium hover:bg-red-700 transition">
+                                    <i class="bi bi-trash-fill"></i>
+                                    <span>Delete User</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -232,6 +247,22 @@
         sidebarToggle?.addEventListener('click', () => {
             sidebar.classList.toggle('-translate-x-full');
         });
+
+        function togglePasswordVisibility() {
+            const passwordText = document.getElementById('passwordText');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const actualPassword = document.getElementById('actualPassword').value;
+            
+            if (passwordText.textContent === '********') {
+                passwordText.textContent = actualPassword;
+                toggleIcon.classList.remove('bi-eye-fill');
+                toggleIcon.classList.add('bi-eye-slash-fill');
+            } else {
+                passwordText.textContent = '********';
+                toggleIcon.classList.remove('bi-eye-slash-fill');
+                toggleIcon.classList.add('bi-eye-fill');
+            }
+        }
     </script>
 </body>
 </html>

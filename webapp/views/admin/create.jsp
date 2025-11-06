@@ -180,11 +180,11 @@
                             <select id="role" name="role" required 
                                     class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 transition">
                                 <option value="">Select a role</option>
-                                <option value="ADMIN">ADMIN</option>
                                 <option value="RECEPTION">RECEPTION</option>
                                 <option value="MEDICAL">MEDICAL</option>
                                 <option value="PARENT">PARENT</option>
                             </select>
+                            <p class="mt-1 text-xs text-gray-500">Note: ADMIN role is not available for new user creation</p>
                         </div>
 
                         <!-- Active Status -->

@@ -29,7 +29,11 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        if (email == null || password == null || email.trim().isEmpty() || password.trim().isEmpty()) {
+        // Trim and validate inputs
+        if (email != null) email = email.trim();
+        if (password != null) password = password.trim();
+        
+        if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             request.setAttribute("error", "Email and password are required");
             request.getRequestDispatcher("/views/guest/login.jsp").forward(request, response);
             return;
@@ -37,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 
         User user = userDAO.findByEmail(email);
 
-        if (user != null && password.equals(user.getPassword()))  {
+        if (user != null && PasswordUtil.verifyPassword(password, user.getPassword()))  {
             if (!user.isActive()) {
                 request.setAttribute("error", "Your account has been deactivated");
                 request.getRequestDispatcher("/views/guest/login.jsp").forward(request, response);
