@@ -306,7 +306,9 @@ public class UserDAO {
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next() && rs.getInt(1) > 0) {
                     // Children will be deleted due to CASCADE, but we should inform about this
-                    System.out.println("Warning: Deleting user will also delete " + rs.getInt(1) + " child record(s)");
+                    int childCount = rs.getInt(1);
+                    // Note: In production, use proper logging framework
+                    System.err.println("Warning: Deleting user will also delete " + childCount + " child record(s)");
                 }
             }
             
@@ -330,7 +332,8 @@ public class UserDAO {
                 try {
                     conn.rollback();
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    // Log rollback failure
+                    System.err.println("Failed to rollback transaction: " + ex.getMessage());
                 }
             }
             throw e;
@@ -340,7 +343,8 @@ public class UserDAO {
                     conn.setAutoCommit(true);
                     conn.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    // Log connection cleanup failure
+                    System.err.println("Failed to close connection: " + e.getMessage());
                 }
             }
         }
