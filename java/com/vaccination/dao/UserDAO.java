@@ -519,6 +519,7 @@ public class UserDAO {
                 Map<String, Object> user = new HashMap<>();
                 user.put("UserID", rs.getInt("UserID"));
                 user.put("Email", rs.getString("Email"));
+                user.put("Password", rs.getString("Password")); // Include password for admin view
                 user.put("FullName", rs.getString("FullName"));
                 user.put("PhoneNumber", rs.getString("PhoneNumber"));
                 user.put("Role", rs.getString("Role"));

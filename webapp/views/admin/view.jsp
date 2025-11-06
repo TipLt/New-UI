@@ -178,6 +178,14 @@
                             </div>
                             
                             <div>
+                                <label class="mb-2 block text-sm font-medium text-gray-500">Password</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="bi bi-lock-fill text-gray-400"></i>
+                                    <p class="text-base font-semibold text-gray-900 font-mono">${user.Password}</p>
+                                </div>
+                            </div>
+                            
+                            <div>
                                 <label class="mb-2 block text-sm font-medium text-gray-500">Account Status</label>
                                 <p class="text-base font-semibold ${user.IsActive ? 'text-green-600' : 'text-red-600'}">
                                     ${user.IsActive ? 'Active' : 'Inactive'}
