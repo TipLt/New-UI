@@ -262,6 +262,15 @@ public class UserDAO {
         return false;
     }
 
+    public boolean deleteUser(int userId) throws SQLException {
+        String sql = "DELETE FROM Users WHERE UserID = ?";
+        try (Connection conn = DatabaseConnection.getInstance().getConnection(); 
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            return stmt.executeUpdate() > 0;
+        }
+    }
+
     private User extractUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setUserId(rs.getInt("UserID"));
